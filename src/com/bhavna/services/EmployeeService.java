@@ -28,6 +28,10 @@ public class EmployeeService {
         Long search = list.stream().filter(item -> item.getName().startsWith("S")).count();
         System.out.println("Count Of Employee Starting With S: "+search);
 
+        List<Employee> filter = list.parallelStream().filter(location -> location.getLocation().equals("Hyderabad"))
+                .collect(Collectors.toList());
+        System.out.println("Employees In Hyderabad Using Parallel Stream: "+filter);
+
         Map<String,List<Employee>> map = list.stream().collect(Collectors.groupingBy(Employee::getLocation));
         System.out.println("Based on Location: "+map);
 
